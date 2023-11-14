@@ -16,7 +16,7 @@ export default function GameDetails() {
 
         commentService.getAll()
             .then(setComments);
-    }, [gameId, comments]);
+    }, [gameId]);
 
     const addCommentHandler = async (e) => {
         e.preventDefault();
@@ -27,6 +27,8 @@ export default function GameDetails() {
             formData.get('username'),
             formData.get('comment'),
         );
+
+        setComments(state => [...state, newComment]);
 
     }
 
@@ -52,8 +54,8 @@ export default function GameDetails() {
                     <ul>
 
 
-                        {comments.map(({ username, text }) => (
-                            <li className="comment">
+                        {comments.map(({ _id, username, text }) => (
+                            <li key={_id} className="comment">
                                 <p>{username}: {text}</p>
                             </li>
                         ))}
