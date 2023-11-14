@@ -9,6 +9,7 @@ import GameCreate from './components/game-create/GameCreate';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
 
+
 function App() {
 
 
@@ -25,6 +26,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         {/* <Route path="/logout" element={<Logout />} /> */}
       </Routes >
+
+
 
 
     </div >
