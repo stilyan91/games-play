@@ -12,8 +12,8 @@ export const create = async (gameId, username, text) => {
 };
 
 
-export const getAll = async () => {
-    const result = await request.get(baseUrl)
+export const getAll = async (gameId) => {
+    const result = await request.get(`${baseUrl}?${query}`);
     
-    return Object.values(result);
+    return Object.values(result).filter(comment => comment.gameId === gameId);
 };
