@@ -7,10 +7,16 @@ import * as commentService from '../../services/commentService';
 export default function GameDetails() {
     const [game, setGame] = useState({});
     const { gameId } = useParams();
+    const [comments, setComments] = useState([]);
+
+
     useEffect(() => {
         gameService.getOne(gameId)
             .then(setGame);
-    }, [gameId]);
+
+        commentService.getAll()
+            .then(setComments);
+    }, [gameId, comments]);
 
     const addCommentHandler = async (e) => {
         e.preventDefault();
@@ -21,7 +27,7 @@ export default function GameDetails() {
             formData.get('username'),
             formData.get('comment'),
         );
-        console.log(newComment);
+
     }
 
     return (
@@ -45,15 +51,15 @@ export default function GameDetails() {
                     <h2>Comments:</h2>
                     <ul>
 
-                        <li className="comment">
-                            <p>Content: I rate this one quite highly.</p>
-                        </li>
-                        <li className="comment">
-                            <p>Content: The best game.</p>
-                        </li>
-                    </ul>
 
-                    <p className="no-comment">No comments.</p>
+                        {comments.map(({ username, text }) => (
+                            <li className="comment">
+                                <p>{username}: {text}</p>
+                            </li>
+                        ))}
+                    </ul>
+                    {comments.length === 0 && <p className="no-comment">No comments.</p>}
+
                 </div>
 
                 {/* <!-- Edit/Delete buttons ( Only for creator of this game )  -->
