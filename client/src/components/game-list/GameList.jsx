@@ -17,7 +17,7 @@ const GameList = () => {
             <h1>All Games</h1>
 
             {games.map(game => (
-                <GameListItem key={game._id} title={game.title} category={game.category} imageUrl={game.imageUrl} />
+                <GameListItem key={game._id} title={game.title} category={game.category} imageUrl={game.imageUrl} id={game._id} />
             ))}
 
             {games.length === 0 && <h3 className="no-articles">No articles yet</h3>}

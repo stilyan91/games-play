@@ -21,3 +21,9 @@ export const getAllGames = async () => {
     return Object.values(result);
     
 };
+
+export const getOne = async (gameId) => {
+    const response = await fetch(`${base_url}/${gameId}`);
+    const result = await response.json();
+    return result;
+}
