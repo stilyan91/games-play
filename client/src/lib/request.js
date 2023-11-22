@@ -9,21 +9,21 @@ const buildOptions = (data) => {
 
     }
     return options;
-}   
+}
 
 export const request = async (method, url, data) => {
 
 
-    const response = await fetch(url,{
+    const response = await fetch(url, {
         ...buildOptions(data),
         method,
     });
     const result = await response.json();
-    return result ;
+    return result;
 };
 
-export const get =  request.bind(null, 'GET');
-export const post =  request.bind(null, 'POST');
-export const remove =  request.bind(null, 'DELETE');
-export const put =  request.bind(null, 'PUT');
-export const patch =  request.bind(null, 'PATCH');
+export const get = request.bind(null, 'GET');
+export const post = request.bind(null, 'POST');
+export const remove = request.bind(null, 'DELETE');
+export const put = request.bind(null, 'PUT');
+export const patch = request.bind(null, 'PATCH');
