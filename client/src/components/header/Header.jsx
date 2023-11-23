@@ -6,6 +6,7 @@ const Header = () => {
     const {
         isAuthenticated,
         username,
+
     } = useContext(AuthContext);
     return (
         <header>
