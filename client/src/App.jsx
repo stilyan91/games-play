@@ -16,7 +16,10 @@ import Logout from './components/logout/Logout';
 
 function App() {
   const navigate = useNavigate();
-  const [auth, setAuth] = useState({});
+  const [auth, setAuth] = useState(() => {
+    localStorage.removeItem('accessToken')
+    return {};
+  });
 
   const loginSubmitHandler = async (values) => {
 
@@ -42,7 +45,6 @@ function App() {
   const logoutHandler = () => {
     setAuth({});
     localStorage.removeItem('accessToken', result.accessToken);
-    navigate(Path.Home);
   };
 
   const values = {
