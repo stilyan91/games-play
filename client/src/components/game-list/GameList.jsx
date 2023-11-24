@@ -8,7 +8,10 @@ const GameList = () => {
 
     useEffect(() => {
         gameService.getAllGames()
-            .then(result => setGames(result));
+            .then(result => setGames(result))
+            .catch(err => {
+                console.log(err);
+            });
     }, [])
 
     return (

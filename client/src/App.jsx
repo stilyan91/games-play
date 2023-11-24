@@ -17,7 +17,7 @@ import Logout from './components/logout/Logout';
 function App() {
   const navigate = useNavigate();
   const [auth, setAuth] = useState(() => {
-    localStorage.removeItem('accessToken')
+    localStorage.removeItem('accessToken');
     return {};
   });
 
@@ -25,14 +25,9 @@ function App() {
 
     const result = await authService.login(values.email, values.password)
 
-    // email,
-    //     username, 
-    //   _id,
-    //    accessToken 
     setAuth(result);
     localStorage.setItem('accessToken', result.accessToken);
     navigate(Path.Home);
-
   };
   const registerSubmitHandler = async (values) => {
     const result = await authService.register(values.email, values.password);
@@ -44,7 +39,7 @@ function App() {
 
   const logoutHandler = () => {
     setAuth({});
-    localStorage.removeItem('accessToken', result.accessToken);
+    localStorage.removeItem('accessToken');
   };
 
   const values = {

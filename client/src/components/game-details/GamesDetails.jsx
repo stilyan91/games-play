@@ -9,7 +9,6 @@ export default function GameDetails() {
     const { gameId } = useParams();
     const [comments, setComments] = useState([]);
 
-
     useEffect(() => {
         gameService.getOne(gameId)
             .then(setGame);
@@ -29,10 +28,11 @@ export default function GameDetails() {
         );
 
         setComments(state => [...state, newComment]);
-
     }
 
+
     return (
+
         <section id="game-details">
             <h1>Game Details</h1>
             <div className="info-section">
