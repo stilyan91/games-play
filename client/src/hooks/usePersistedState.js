@@ -10,7 +10,7 @@ export default function usePersistedState(key, defaultValue) {
         return defaultValue;
     });
     const setPersistedState = (value) => {
-        let resultState = state;
+
         setState(value);
 
         let serializedValue;
@@ -22,7 +22,6 @@ export default function usePersistedState(key, defaultValue) {
         };
 
         localStorage.setItem(key, serializedValue);
-
     };
 
     return [
