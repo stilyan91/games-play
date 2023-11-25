@@ -10,17 +10,13 @@ export const create = async (gameData) => {
 
 export const getAllGames = async () => {
     const result = await request.get(baseUrl);
+
     return result;
 };
 
-// export const getOne = async (gameId) => {
-//     const result = await fetch(`${baseUrl}/${gameId}`,);
-
-//     return result;
-// }
 
 export const getOne = async (gameId) => {
     const result = await request.get(`${baseUrl}/${gameId}`,);
-    console.log(result)
+
     return result;
 };
