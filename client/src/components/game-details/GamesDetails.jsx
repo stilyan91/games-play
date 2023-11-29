@@ -1,5 +1,5 @@
 import { useContext, useEffect, useReducer, useState, useMemo } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import * as gameService from '../../services/gameService';
 import * as commentService from '../../services/commentService';
 import AuthContext from "../../contexts/authContext";
@@ -9,13 +9,12 @@ import { pathToUrl } from "../../utils/pathUtils";
 import Path from '../../paths';
 
 
-
 export default function GameDetails() {
     const { email, userId } = useContext(AuthContext);
     const [game, setGame] = useState({});
     const { gameId } = useParams();
     const [comments, dispatch] = useReducer(reducer, []);
-
+    const navigate = useNavigate();
 
     useEffect(() => {
         gameService.getOne(gameId)
@@ -42,6 +41,15 @@ export default function GameDetails() {
             comments: newComment,
         })
     }
+    const deleteButtonClickHandler = async () => {
+        const hasConfirmed = confirm(`Are you sure you want to delete ${game.title}`);
+
+        if (hasConfirmed) {
+            await gameService.remove(gameId);
+
+            navigate('/games');
+        }
+    }
     //TODO
     const initialValues = useMemo(() => ({
         comment: ''
@@ -49,10 +57,6 @@ export default function GameDetails() {
 
 
     const { values, onChange, onSubmit } = useForm(addCommentHandler, initialValues);
-
-    // if (Math.random() < 0.5) {
-    //     throw new Error('GAme details erorr')
-    // }
 
     return (
 
@@ -90,7 +94,7 @@ export default function GameDetails() {
                 {userId === game._ownerId &&
                     <div className="buttons">
                         <Link to={pathToUrl(Path.GameEdit, { gameId })} className="button">Edit</Link>
-                        <Link to='/games/:gameId/delete' className="button">Delete</Link>
+                        <button className="button" onClick={deleteButtonClickHandler} >Delete</button>
                     </div>}
             </div>
 

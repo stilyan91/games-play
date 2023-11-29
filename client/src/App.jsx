@@ -14,6 +14,7 @@ import GameDetails from './components/game-details/GamesDetails';
 import GameEdit from './components/game-edit/GameEdit';
 import Logout from './components/logout/Logout';
 import ErrorBoundary from './components/ErrorBoundary';
+import AuthGuardAdvanced from './components/guards/AuthGuardAdvanced';
 
 function App() {
 
@@ -22,15 +23,21 @@ function App() {
       <AuthProvider >
         <div id="box">
           <Header />
+
           <Routes>
             <Route path={Path.Home} element={<Home />} />
             <Route path="/games" element={<GameList />} />
-            <Route path="/games/create" element={<GameCreate />} />
+            {/* <Route path="/games/create" element={<AuthGuard > <GameCreate /></AuthGuard>} /> - baseGuard*/}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/games/:gameId" element={<GameDetails />} />
-            <Route path={Path.GameEdit} element={<GameEdit />} />
-            <Route path={Path.Logout} element={<Logout />} />
+
+            <Route element={<AuthGuardAdvanced />}>
+              <Route path="/games/create" element={<GameCreate />} />
+              <Route path={Path.GameEdit} element={<GameEdit />} />
+              <Route path={Path.Logout} element={<Logout />} />
+            </Route>
+
           </Routes >
         </div >
       </AuthProvider >
